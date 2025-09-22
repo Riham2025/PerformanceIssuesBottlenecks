@@ -29,4 +29,9 @@ Update stock, create order + order-items, save once, then commit.
 
 (Optional but recommended) Use optimistic concurrency via a RowVersion column.
 
-## Symptoms You May Be Seeing
+## Symptoms You May Be Seeing : 
+
+Slow requests and high DB CPU due to many small queries.
+
+
+
