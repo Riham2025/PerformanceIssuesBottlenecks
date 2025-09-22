@@ -131,3 +131,21 @@ public int Quantity { get; set; }
 ```
 
 ## AutoMapper Profile (for order-lines)
+
+Use context Items to avoid manual FK assignment:
+```
+public class OrderMappingProfile : Profile
+{
+public OrderMappingProfile()
+{
+CreateMap<OrderItemDTO, OrderProducts>()
+.ForMember(d => d.PID, opt => opt.MapFrom(s => s.ProductId))
+.ForMember(d => d.OID, opt => opt.Ignore())
+.AfterMap((src, dest, ctx) =>
+{
+var order = (Order)ctx.Items["Order"];
+dest.OID = order.OID; // set FK via mapping context
+});
+}
+}
+```
