@@ -119,3 +119,5 @@ public int Quantity { get; set; }
 ```
 
 ## Order Item DTO
+
+Prefer this structure (ID-based):
