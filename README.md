@@ -121,3 +121,13 @@ public int Quantity { get; set; }
 ## Order Item DTO
 
 Prefer this structure (ID-based):
+```
+public class OrderItemDTO
+{
+public int ProductId { get; set; }
+public int Quantity { get; set; }
+}
+
+```
+
+## AutoMapper Profile (for order-lines)
