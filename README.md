@@ -40,3 +40,23 @@ Partial updates if an exception happens after the order is created.
 Inconsistent totals if prices change between the two loops (validate vs. process).
 
 ## Root Causes in the Original Code
+
+```
+// (abridged) Key problems in the old version
+for (int i = 0; i < items.Count; i++) {
+existingProduct = _productService.GetProductByName(items[i].ProductName); // DB call in a loop
+// ...
+}
+
+
+foreach (var item in items) {
+existingProduct = _productService.GetProductByName(item.ProductName); // DB call again in a loop
+// deduct stock, add OrderProducts, update product
+}
+```
+
+N+1 pattern: You call the DB for each item twice (validation & processing).
+
+
+
+
