@@ -11,6 +11,6 @@ Your original implementation:
 
 Performs repeated DB lookups inside loops (GetProductByName) → latency & load.
 
-
+Does validation in one pass and then re-queries in a second pass → stale reads under concurrency.
 
 
