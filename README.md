@@ -66,3 +66,8 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 5- Update per item with immediate UpdateProduct(...) → multiple SaveChanges paths if services call the DB eagerly (depends on service implementation).
 
 ## What “Correct” Should Guarantee
+
+1- Atomicity: order + all its lines + stock deductions succeed or nothing persists.
+
+
+
