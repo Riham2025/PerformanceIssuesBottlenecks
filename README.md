@@ -285,3 +285,6 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
  Exception mid-process → transaction rolls back (no partial writes).
 
  Name-only variant (if applicable) with unique index enforced.
+
+
+ ## Service Layer Considerations (If You Keep Services)
