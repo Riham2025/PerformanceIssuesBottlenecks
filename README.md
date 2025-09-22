@@ -253,3 +253,13 @@ If OrderItemDTO only provides ProductName:
 1- Enforce a unique index on Product.Name (case/culture normalized).
 
 2- Load with one query:
+```
+var names = mergedByName.Select(i => i.ProductName).ToList();
+var products = await db.Products
+.Where(p => names.Contains(p.Name))
+.ToDictionaryAsync(p => p.Name);
+```
+
+3- Proceed as above (but map name → PID).
+
+Recommendation: Ship an API change to accept ProductId; keep name lookups only for UX convenience.
