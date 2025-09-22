@@ -15,3 +15,4 @@ Does validation in one pass and then re-queries in a second pass → stale reads
 
 No transaction: failures mid-way leave partial writes (e.g., order created, but some rows/stock not updated).
 
+Uses product name as the key (fragile; not guaranteed unique).
