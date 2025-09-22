@@ -25,5 +25,5 @@ Merge duplicate lines per product and validate once.
 
 Wrap all changes in a database transaction (preferably Serializable) to prevent overselling.
 
-
+Update stock, create order + order-items, save once, then commit.
 
