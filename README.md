@@ -269,3 +269,19 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 1- DB calls go from ~2 * N + updates to 3 total (load all products, insert order, save changes).
 
 2- Latency becomes far more predictable; no per-item chatty calls.
+
+## Testing Checklist
+
+✅ Order with single item (happy path).
+
+✅ Order with duplicate items for the same product (merging works).
+
+✅ Order with zero/negative quantity → rejected.
+
+✅ Out-of-stock path → rejected, nothing persisted.
+
+✅ Two concurrent orders competing for the last units → no oversell (one succeeds, one fails).
+
+✅ Exception mid-process → transaction rolls back (no partial writes).
+
+✅ Name-only variant (if applicable) with unique index enforced.
