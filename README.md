@@ -272,7 +272,7 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
 ## Testing Checklist
 
-✅ Order with single item (happy path).
+ Order with single item (happy path).
 
 ✅ Order with duplicate items for the same product (merging works).
 
