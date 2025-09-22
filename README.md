@@ -233,3 +233,15 @@ await tx.CommitAsync(ct);
 return order.OID;
 }
 ```
+
+## Notes on Concurrency
+
+Serializable isolation prevents concurrent transactions from interleaving in a way that causes oversell.
+
+Alternatively (or additionally), add RowVersion to Product and turn on optimistic concurrency:
+
+In the Product entity: public byte[] RowVersion { get; set; }
+
+In OnModelCreating: modelBuilder.Entity<Product>().Property(p => p.RowVersion).IsRowVersion();
+
+Catch DbUpdateConcurrencyException and return 409 Conflict to clients.
