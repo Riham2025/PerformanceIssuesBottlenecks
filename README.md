@@ -151,3 +151,85 @@ dest.OID = order.OID; // set FK via mapping context
 ```
 
 ## The Fixed Implementation (EF Core) : 
+
+Key ideas: Load all products in one query, validate & compute totals in-memory, wrap everything in a transaction, save once.
+```
+using System.Data;
+if (items is null || items.Count == 0)
+throw new ArgumentException("Order must contain at least one item.");
+
+
+// 1) Normalize: merge duplicate lines by ProductId
+var mergedItems = items
+.GroupBy(i => i.ProductId)
+.Select(g => new OrderItemDTO { ProductId = g.Key, Quantity = g.Sum(x => x.Quantity) })
+.ToList();
+
+
+// 2) Load all products in ONE query
+var productIds = mergedItems.Select(i => i.ProductId).ToList();
+var products = await db.Products
+.Where(p => productIds.Contains(p.PID))
+.ToDictionaryAsync(p => p.PID, ct);
+
+
+// 3) Validate existence & stock, compute total
+decimal total = 0m;
+foreach (var item in mergedItems)
+{
+if (!products.TryGetValue(item.ProductId, out var p))
+throw new InvalidOperationException($"Product {item.ProductId} not found.");
+
+
+if (item.Quantity <= 0)
+throw new InvalidOperationException($"Quantity must be positive for product {p.Name}.");
+
+
+if (p.Stock < item.Quantity)
+throw new InvalidOperationException($"Insufficient stock for '{p.Name}'. Requested {item.Quantity}, available {p.Stock}.");
+
+
+total += item.Quantity * p.Price;
+}
+
+
+// 4) Transaction to make the operation atomic and concurrency-safe
+await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
+
+
+// 5) Create order first to get OID
+var order = new Order
+{
+UID = uid,
+OrderDate = DateTime.UtcNow,
+TotalAmount = 0m
+};
+db.Orders.Add(order);
+await db.SaveChangesAsync(ct); // generates OID
+
+
+// 6) Map order-items via AutoMapper (passing the order through context)
+var orderLines = mapper.Map<List<OrderProducts>>(mergedItems, opt => opt.Items["Order"] = order);
+db.OrderProducts.AddRange(orderLines);
+
+
+// 7) Deduct stock in-memory; EF tracks changes
+foreach (var item in mergedItems)
+{
+var p = products[item.ProductId];
+p.Stock -= item.Quantity; // safe due to earlier validation & transaction isolation
+}
+
+
+// 8) Set total & save once
+order.TotalAmount = total;
+await db.SaveChangesAsync(ct);
+
+
+// 9) Commit
+await tx.CommitAsync(ct);
+
+
+return order.OID;
+}
+```
