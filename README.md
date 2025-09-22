@@ -274,7 +274,7 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
  Order with single item (happy path).
 
-✅ Order with duplicate items for the same product (merging works).
+ Order with duplicate items for the same product (merging works).
 
 ✅ Order with zero/negative quantity → rejected.
 
