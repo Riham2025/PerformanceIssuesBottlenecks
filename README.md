@@ -67,10 +67,15 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 ## What “Correct” Should Guarantee
 
-Atomicity: order + all its lines + stock deductions succeed or nothing persists.
+1- Atomicity: order + all its lines + stock deductions succeed or nothing persists.
 
-No oversell: concurrent orders never drive stock negative.
+2- No oversell: concurrent orders never drive stock negative.
 
-Performance: bounded number of DB calls (ideally 2–3 queries total per order).
+3- Performance: bounded number of DB calls (ideally 2–3 queries total per order).
 
-Deterministic totals: price/qty snapshot is consistent within the transaction.
+4- Deterministic totals: price/qty snapshot is consistent within the transaction.
+
+## Recommended Data & Mapping Tweaks :
+
+
+
