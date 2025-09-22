@@ -245,3 +245,9 @@ In the Product entity: public byte[] RowVersion { get; set; }
 In OnModelCreating: modelBuilder.Entity<Product>().Property(p => p.RowVersion).IsRowVersion();
 
 Catch DbUpdateConcurrencyException and return 409 Conflict to clients.
+
+## If You Must Use Product Names
+
+If OrderItemDTO only provides ProductName:
+
+Enforce a unique index on Product.Name (case/culture normalized).
