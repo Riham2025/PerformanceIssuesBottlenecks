@@ -79,4 +79,5 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 Prefer IDs in DTOs: add a ProductId to OrderItemDTO. Names can be user-facing, but persistence should use IDs.
 
+Optional: add RowVersion to Product for optimistic concurrency (EF Core IsRowVersion).
 
