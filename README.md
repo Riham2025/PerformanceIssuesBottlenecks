@@ -75,7 +75,8 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 4- Deterministic totals: price/qty snapshot is consistent within the transaction.
 
-## Recommended Data & Mapping Tweaks :
+## Recommended Data & Mapping Tweaks
 
+Prefer IDs in DTOs: add a ProductId to OrderItemDTO. Names can be user-facing, but persistence should use IDs.
 
 
