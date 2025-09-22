@@ -55,12 +55,14 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 }
 ```
 
-N+1 pattern: You call the DB for each item twice (validation & processing).
+1- N+1 pattern: You call the DB for each item twice (validation & processing).
 
-No transaction: if an exception occurs mid-loop, some updates are persisted, others are not.
+2- No transaction: if an exception occurs mid-loop, some updates are persisted, others are not.
 
-Stale reads: products are fetched in validation phase, but stock/prices could change before the processing loop.
+3- Stale reads: products are fetched in validation phase, but stock/prices could change before the processing loop.
 
-Using Name instead of ID: collisions and case/culture issues; hard to guarantee uniqueness without a strict constraint.
+4- Using Name instead of ID: collisions and case/culture issues; hard to guarantee uniqueness without a strict constraint.
 
-Update per item with immediate UpdateProduct(...) → multiple SaveChanges paths if services call the DB eagerly (depends on service implementation).
+5- Update per item with immediate UpdateProduct(...) → multiple SaveChanges paths if services call the DB eagerly (depends on service implementation).
+
+## What “Correct” Should Guarantee
