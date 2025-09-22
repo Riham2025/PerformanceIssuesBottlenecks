@@ -84,3 +84,38 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 3- Unique constraint on Product.Name only if you must accept names.
 
 ## Sample Entities (extract) 
+
+```
+public class Product
+{
+public int PID { get; set; }
+public string Name { get; set; } = default!;
+public decimal Price { get; set; }
+public int Stock { get; set; }
+
+
+// Optional for optimistic concurrency:
+public byte[]? RowVersion { get; set; }
+}
+
+
+public class Order
+{
+public int OID { get; set; }
+public int UID { get; set; }
+public DateTime OrderDate { get; set; }
+public decimal TotalAmount { get; set; }
+public List<OrderProducts> Items { get; set; } = new();
+}
+
+
+public class OrderProducts
+{
+public int OID { get; set; } // FK → Order
+public int PID { get; set; } // FK → Product
+public int Quantity { get; set; }
+}
+
+```
+
+## Order Item DTO
