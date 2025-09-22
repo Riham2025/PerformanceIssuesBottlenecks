@@ -21,6 +21,7 @@ Uses product name as the key (fragile; not guaranteed unique).
 
 Single DB round-trip to load all needed products (by IDs; fall back to names only if they are uniquely constrained).
 
+Merge duplicate lines per product and validate once.
 
 
 
