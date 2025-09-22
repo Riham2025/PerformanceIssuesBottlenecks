@@ -63,3 +63,4 @@ Stale reads: products are fetched in validation phase, but stock/prices could ch
 
 Using Name instead of ID: collisions and case/culture issues; hard to guarantee uniqueness without a strict constraint.
 
+Update per item with immediate UpdateProduct(...) → multiple SaveChanges paths if services call the DB eagerly (depends on service implementation).
