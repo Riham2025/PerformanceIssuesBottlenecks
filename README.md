@@ -28,3 +28,5 @@ Wrap all changes in a database transaction (preferably Serializable) to prevent 
 Update stock, create order + order-items, save once, then commit.
 
 (Optional but recommended) Use optimistic concurrency via a RowVersion column.
+
+## Symptoms You May Be Seeing
