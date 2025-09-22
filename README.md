@@ -288,3 +288,11 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
 
  ## Service Layer Considerations (If You Keep Services)
+
+ If you prefer _productService, _orderProductsService, etc.:
+
+Ensure they respect the ambient transaction (i.e., they use the same DbContext / connection / unit-of-work).
+
+Avoid SaveChanges in each service method; instead, let the application layer call SaveChangesOnce at the end.
+
+## Appendix: Recommended Constraints
