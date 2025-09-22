@@ -73,3 +73,4 @@ No oversell: concurrent orders never drive stock negative.
 
 Performance: bounded number of DB calls (ideally 2–3 queries total per order).
 
+Deterministic totals: price/qty snapshot is consistent within the transaction.
