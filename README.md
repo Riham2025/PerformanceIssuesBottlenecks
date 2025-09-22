@@ -276,7 +276,7 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
  Order with duplicate items for the same product (merging works).
 
-✅ Order with zero/negative quantity → rejected.
+ Order with zero/negative quantity → rejected.
 
 ✅ Out-of-stock path → rejected, nothing persisted.
 
