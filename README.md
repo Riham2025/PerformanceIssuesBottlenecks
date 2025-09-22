@@ -23,6 +23,7 @@ Single DB round-trip to load all needed products (by IDs; fall back to names onl
 
 Merge duplicate lines per product and validate once.
 
+Wrap all changes in a database transaction (preferably Serializable) to prevent overselling.
 
 
 
