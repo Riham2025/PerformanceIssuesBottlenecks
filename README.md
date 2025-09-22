@@ -250,4 +250,4 @@ Catch DbUpdateConcurrencyException and return 409 Conflict to clients.
 
 If OrderItemDTO only provides ProductName:
 
-Enforce a unique index on Product.Name (case/culture normalized).
+1- Enforce a unique index on Product.Name (case/culture normalized).
