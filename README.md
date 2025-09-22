@@ -59,5 +59,6 @@ N+1 pattern: You call the DB for each item twice (validation & processing).
 
 No transaction: if an exception occurs mid-loop, some updates are persisted, others are not.
 
+Stale reads: products are fetched in validation phase, but stock/prices could change before the processing loop.
 
 
