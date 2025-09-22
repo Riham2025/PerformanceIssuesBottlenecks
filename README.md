@@ -282,6 +282,6 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
  Two concurrent orders competing for the last units → no oversell (one succeeds, one fails).
 
-✅ Exception mid-process → transaction rolls back (no partial writes).
+ Exception mid-process → transaction rolls back (no partial writes).
 
 ✅ Name-only variant (if applicable) with unique index enforced.
