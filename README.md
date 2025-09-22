@@ -33,5 +33,6 @@ Update stock, create order + order-items, save once, then commit.
 
 Slow requests and high DB CPU due to many small queries.
 
+Race conditions: two users buy the last item concurrently → overselling.
 
 
