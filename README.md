@@ -77,8 +77,10 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 ## Recommended Data & Mapping Tweaks
 
-Prefer IDs in DTOs: add a ProductId to OrderItemDTO. Names can be user-facing, but persistence should use IDs.
+1- Prefer IDs in DTOs: add a ProductId to OrderItemDTO. Names can be user-facing, but persistence should use IDs.
 
-Optional: add RowVersion to Product for optimistic concurrency (EF Core IsRowVersion).
+2- Optional: add RowVersion to Product for optimistic concurrency (EF Core IsRowVersion).
 
-Unique constraint on Product.Name only if you must accept names.
+3- Unique constraint on Product.Name only if you must accept names.
+
+## Sample Entities (extract) 
