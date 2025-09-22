@@ -67,7 +67,8 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 ## What “Correct” Should Guarantee
 
-1- Atomicity: order + all its lines + stock deductions succeed or nothing persists.
+Atomicity: order + all its lines + stock deductions succeed or nothing persists.
 
+No oversell: concurrent orders never drive stock negative.
 
 
