@@ -1,4 +1,4 @@
-# PerformanceIssuesBottlenecks
+﻿# PerformanceIssuesBottlenecks
 
 ## Fixing Loop-Related Database Issues in PlaceOrder
 
@@ -9,6 +9,7 @@ Goal: Eliminate logic + database anti-patterns (N+1 calls, race conditions, part
 
 Your original implementation:
 
+Performs repeated DB lookups inside loops (GetProductByName) → latency & load.
 
 
 
