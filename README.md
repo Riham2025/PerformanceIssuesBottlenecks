@@ -81,3 +81,4 @@ Prefer IDs in DTOs: add a ProductId to OrderItemDTO. Names can be user-facing, b
 
 Optional: add RowVersion to Product for optimistic concurrency (EF Core IsRowVersion).
 
+Unique constraint on Product.Name only if you must accept names.
