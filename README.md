@@ -38,3 +38,5 @@ Race conditions: two users buy the last item concurrently → overselling.
 Partial updates if an exception happens after the order is created.
 
 Inconsistent totals if prices change between the two loops (validate vs. process).
+
+## Root Causes in the Original Code
