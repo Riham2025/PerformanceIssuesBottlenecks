@@ -57,6 +57,7 @@ existingProduct = _productService.GetProductByName(item.ProductName); // DB call
 
 N+1 pattern: You call the DB for each item twice (validation & processing).
 
+No transaction: if an exception occurs mid-loop, some updates are persisted, others are not.
 
 
 
