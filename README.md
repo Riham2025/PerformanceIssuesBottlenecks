@@ -296,3 +296,9 @@ Ensure they respect the ambient transaction (i.e., they use the same DbContext /
 Avoid SaveChanges in each service method; instead, let the application layer call SaveChangesOnce at the end.
 
 ## Appendix: Recommended Constraints
+
+CHECK (Stock >= 0) on Products.
+
+Unique index on Products(Name) only if using names operationally.
+
+Consider DECIMAL(18,2) for money columns; do not use float/double.
