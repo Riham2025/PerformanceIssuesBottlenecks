@@ -278,7 +278,7 @@ Recommendation: Ship an API change to accept ProductId; keep name lookups only f
 
  Order with zero/negative quantity → rejected.
 
-✅ Out-of-stock path → rejected, nothing persisted.
+ Out-of-stock path → rejected, nothing persisted.
 
 ✅ Two concurrent orders competing for the last units → no oversell (one succeeds, one fails).
 
