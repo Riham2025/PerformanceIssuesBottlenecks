@@ -61,4 +61,5 @@ No transaction: if an exception occurs mid-loop, some updates are persisted, oth
 
 Stale reads: products are fetched in validation phase, but stock/prices could change before the processing loop.
 
+Using Name instead of ID: collisions and case/culture issues; hard to guarantee uniqueness without a strict constraint.
 
