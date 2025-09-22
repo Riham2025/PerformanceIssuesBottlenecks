@@ -263,3 +263,9 @@ var products = await db.Products
 3- Proceed as above (but map name → PID).
 
 Recommendation: Ship an API change to accept ProductId; keep name lookups only for UX convenience.
+
+## Performance Impact
+
+1- DB calls go from ~2 * N + updates to 3 total (load all products, insert order, save changes).
+
+2- Latency becomes far more predictable; no per-item chatty calls.
